@@ -17,6 +17,8 @@ Author URL: http://w3layouts.com
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/style-starter.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
 
 </head>
 
@@ -64,14 +66,14 @@ Author URL: http://w3layouts.com
 					<a href="#twitter" class="editContent">twitter</a>
 					or <a href="#linkedin" class="editContent">Facebook</a>.</h3>
 			</div>
-			<form action="https://sendmail.w3layouts.com/submitForm" method="post" class="">
+			<form action="" id="submit-form" class="">
 				<div class="main-input">
 					<input type="text" name="w3lName" placeholder="Enter your name" class="contact-input" required="" />
 					<input type="email" name="w3lSender" placeholder="Enter your mail" class="contact-input" required="" />
 					<input type="email" name="w3lSubject" placeholder="Subject" class="contact-input" />
 					<textarea class="contact-textarea contact-input" name="w3lMessage" placeholder="Enter your message" required=""></textarea>
 				</div>
-				<div class="text-right">
+				<div class="text-right" id="submit-form">
 					<button class="btn-primary btn btn-style">Send</button>
 				</div>
 			</form>
@@ -103,95 +105,26 @@ Author URL: http://w3layouts.com
     </div>
   </section>
 </footer>
-<!-- //Footer -->
 
-<!-- move top -->
-<button onclick="topFunction()" id="movetop" class="editContent" title="Go to top">
-  <span class="fa fa-angle-up"></span>
-</button>
 <script>
-  // When the user scrolls down 20px from the top of the document, show the button
-  window.onscroll = function () {
-    scrollFunction()
-  };
+  $("#submit-form").submit((e)=>{
+      e.preventDefault()
+      $.ajax({
+          url:"https://script.google.com/macros/s/AKfycbwI9Q5kTMIReTb-HSJNNmt_SFJX6xvVbrHhZA20gYiftuPitUk/exec",
+          data:$("#submit-form").serialize(),
+          method:"post",
+          success:function (response){
+              alert("Form submitted successfully")
+              window.location.reload()
+              //window.location.href="https://google.com"
+          },
+          error:function (err){
+              alert("Something Error")
 
-  function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      document.getElementById("movetop").style.display = "block";
-    } else {
-      document.getElementById("movetop").style.display = "none";
-    }
-  }
-
-  // When the user clicks on the button, scroll to the top of the document
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-</script>
-<!-- /move top -->
-
-<!-- common jquery -->
-<script src="assets/js/jquery-3.3.1.min.js"></script>
-<!-- //common jquery -->
-
-<!-- disable body scroll which navbar is in active -->
-<script>
-  $(function () {
-    $('.navbar-toggler').click(function () {
-      $('body').toggleClass('noscroll');
-    })
-  });
-</script>
-<!-- disable body scroll which navbar is in active -->
-
-
-<!-- for blog carousel slider -->
-<script src="assets/js/owl.carousel.js"></script>
-<script>
-  $(document).ready(function () {
-    var owl = $('.owl-carousel');
-    owl.owlCarousel({
-      stagePadding: 20,
-      margin: 15,
-      nav: false,
-      loop: false,
-      responsive: {
-        0: {
-          items: 1
-        },
-        600: {
-          items: 2
-        },
-        1000: {
-          items: 3
-        }
-      }
-    })
+          }
+      })
   })
 </script>
-<!-- //for blog carousel slider -->
-
-
-<!-- stats number counter-->
-<script src="assets/js/jquery.waypoints.min.js"></script>
-<script src="assets/js/jquery.countup.js"></script>
-<script>
-  $('.counter').countUp();
-</script>
-<!-- //stats number counter -->
-
-<!-- jQuery-Photo-filter-lightbox-portfolio-plugin -->
-<script src="assets/js/jquery-1.7.2.js"></script>
-<script src="assets/js/jquery.quicksand.js"></script>
-<script src="assets/js/script.js"></script>
-<script src="assets/js/jquery.prettyPhoto.js"></script>
-<!-- //jQuery-Photo-filter-lightbox-portfolio-plugin -->
-
-<!--  bootstrap js -->
-<script src="assets/js/bootstrap.min.js"></script>
-<!--  //bootstrap js -->
-
 </body>
 
 </html>
